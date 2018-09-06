@@ -1,0 +1,5 @@
+version: ac-snort tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  3272
+version: ac-snort tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  3281
+version: ac-snort tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  3282
+version: ac-snort tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  3267
+version: ac-snort tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  3278

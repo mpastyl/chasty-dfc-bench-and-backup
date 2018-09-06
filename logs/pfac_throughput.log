@@ -1,0 +1,5 @@
+version: pfac tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  638.19 dev_write:  114.25 dev_read:  242.71 post_proc:  560.080017
+version: pfac tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  638.18 dev_write:  113.99 dev_read:  241.35 post_proc:  560.620972
+version: pfac tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  639.58 dev_write:  114.27 dev_read:  242.17 post_proc:  563.596985
+version: pfac tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  637.80 dev_write:  114.09 dev_read:  242.18 post_proc:  563.503967
+version: pfac tags: none patterns: /home/odroid/Downloads/dfc-rulesets/http_related_rules dataset: /home/odroid/Downloads/dfc-datasets/outside_http.pcap kernel_exec:  638.94 dev_write:  113.89 dev_read:  241.65 post_proc:  567.164001
