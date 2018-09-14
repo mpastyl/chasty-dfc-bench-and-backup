@@ -1,6 +1,6 @@
 import numpy as np
 
-colors = ['lightsalmon','skyblue','steelblue','mediumseagreen','lightgreen','0.30','0.70','m']
+colors = ['lightgreen','lightsalmon','skyblue','steelblue','mediumseagreen','0.30','0.70','m']
 hatches = ['/','\\\\','x','\\','//']
 
 def plot_bars(ax,groups,labels,title,legend,to_compare,stdz,show_legend=False, on_top=False):

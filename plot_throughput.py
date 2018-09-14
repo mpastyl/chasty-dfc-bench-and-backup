@@ -12,6 +12,7 @@ names = ["ac-snort", \
          "combined", \
          "combined_vec"]
 
+need_correction = [ "ac-snort", "dfc-cpu"]
 
 datasets = ["outside_http.pcap"]
 patterns = ["http_related_rules"]
@@ -31,6 +32,7 @@ for v in names:
             dev_write = 0 
             dev_read = 0
             post_proc = 0
+            file_read = 0
             v = row.split("version: ")[1].split()[0]
             pat = row.split("patterns: ")[1].split()[0].split('/')[-1]
             dataset = row.split("dataset: ")[1].split()[0].split('/')[-1]
@@ -41,20 +43,25 @@ for v in names:
                 dev_read = float(row.split("dev_read: ")[1].split()[0])
             if "post_proc" in row:
                 post_proc = float(row.split("post_proc: ")[1].split()[0])
+            if "file_read" in row:
+                file_read = float(row.split("file_read: ")[1].split()[0])
             
             if not Data.has_key((v,pat,dataset)):
                 Data[(v,pat,dataset)] = {"kernel_exec": [kernel_exec], "dev_write": [dev_write], \
-                            "dev_read": [dev_read], "post_proc": [post_proc]}
+                        "dev_read": [dev_read], "post_proc": [post_proc], "file_read": [file_read]}
             else:
                 Data[(v,pat,dataset)]["kernel_exec"].append(kernel_exec)
                 Data[(v,pat,dataset)]["dev_write"].append(dev_write)
                 Data[(v,pat,dataset)]["dev_read"].append(dev_read)
                 Data[(v,pat,dataset)]["post_proc"].append(post_proc)
+                Data[(v,pat,dataset)]["file_read"].append(file_read)
 
 SD={}
 ### average the runs ###
 for x in Data:
     SD[x]={}
+    if x[0] in need_correction:
+        Data[x]["kernel_exec"] = list( np.array(Data[x]["kernel_exec"]) -  np.array(Data[x]["file_read"]))
     for y in Data[x]:
         SD[x][y] =  np.std(Data[x][y])
         Data[x][y] = sum(Data[x][y])/float(len(Data[x][y]))
@@ -62,21 +69,24 @@ for x in Data:
 
 print Data
 
-kernels = [get_versions(Data,patterns[0],datasets[0],"dev_write")]
+kernels = [get_versions(Data,patterns[0],datasets[0],"file_read")] 
+kernels.append(get_versions(Data,patterns[0],datasets[0],"dev_write"))
 kernels.append(get_versions(Data,patterns[0],datasets[0],"kernel_exec")) 
 kernels.append(get_versions(Data,patterns[0],datasets[0],"dev_read")) 
 kernels.append(get_versions(Data,patterns[0],datasets[0],"post_proc")) 
 #stdz = [[0]*len(kernels[0])]*len(kernels)
-stdz = [get_versions(SD,patterns[0],datasets[0],"dev_write")]
+stdz = [get_versions(SD,patterns[0],datasets[0],"file_read")] 
+stdz.append(get_versions(SD,patterns[0],datasets[0],"dev_write"))
 stdz.append(get_versions(SD,patterns[0],datasets[0],"kernel_exec")) 
 stdz.append(get_versions(SD,patterns[0],datasets[0],"dev_read")) 
 stdz.append(get_versions(SD,patterns[0],datasets[0],"post_proc")) 
+stdz.append(get_versions(SD,patterns[0],datasets[0],"file_read")) 
 
 
 print kernels, stdz
 FIG_SIZE=(10,5)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
-legend = ["write to dev","execution","read from dev","post_processing"]
+legend = ["read_from_file","write to dev","execution","read from dev","post_processing"]
 lgd = plot_bars(ax,kernels,names,"Versions", legend, [], stdz, show_legend=True, on_top=True)
 
 name="/home/odroid/chasty-dfc-benchmarks/plots/execution_time_stacked.pdf"

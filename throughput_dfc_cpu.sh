@@ -27,8 +27,9 @@ do
 			echo $version $data $pat
 			res=$($script_name $pat $data)
 			total_time="$(echo $res| grep -oP "Total search time: [+-]?([0-9]*[.])?[0-9]+"|cut -d ":" -f2)"
-			echo "version: "$version "tags: "$tags "patterns: "$pat "dataset: "$data "kernel_exec: "$total_time 
-			echo "version: "$version "tags: "$tags "patterns: "$pat "dataset: "$data "kernel_exec: "$total_time >> $log_dir$log_name
+			file_read="$(echo $res| grep -oP "Reading data from file: [+-]?([0-9]*[.])?[0-9]+"|cut -d ":" -f2)"
+			echo "version: "$version "tags: "$tags "patterns: "$pat "dataset: "$data "kernel_exec: "$total_time "file_read: "$file_read
+			echo "version: "$version "tags: "$tags "patterns: "$pat "dataset: "$data "kernel_exec: "$total_time "file_read: "$file_read >> $log_dir$log_name
 		done
 	done
 done

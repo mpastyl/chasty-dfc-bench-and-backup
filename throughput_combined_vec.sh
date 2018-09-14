@@ -31,8 +31,9 @@ do
 			kernel_exec="$(echo $res| grep -oP "OpenCL executing kernel: [+-]?([0-9]*[.])?[0-9]+"|cut -d ":" -f2)"
 			#might need to change on non-Heterogeneous verions
 			post_proc="$(echo $res| grep -oP "CPU process matches \(Heterogeneous version\): [+-]?([0-9]*[.])?[0-9]+"|cut -d ":" -f2)"
-			echo "version: "$version "tags: "$tags "patterns: "$pat "dataset: "$data "kernel_exec: "$kernel_exec "dev_write: "$dev_write "dev_read: "$dev_read "post_proc: "$post_proc
-			echo "version: "$version "tags: "$tags "patterns: "$pat "dataset: "$data "kernel_exec: "$kernel_exec "dev_write: "$dev_write "dev_read: "$dev_read "post_proc: "$post_proc >> $log_dir$log_name
+			file_read="$(echo $res| grep -oP "Reading data from file: [+-]?([0-9]*[.])?[0-9]+"|cut -d ":" -f2)"
+			echo "version: "$version "tags: "$tags "patterns: "$pat "dataset: "$data "kernel_exec: "$kernel_exec "dev_write: "$dev_write "dev_read: "$dev_read "post_proc: "$post_proc "file_read: "$file_read
+			echo "version: "$version "tags: "$tags "patterns: "$pat "dataset: "$data "kernel_exec: "$kernel_exec "dev_write: "$dev_write "dev_read: "$dev_read "post_proc: "$post_proc "file_read: "$file_read >> $log_dir$log_name
 		done
 	done
 done
