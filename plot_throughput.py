@@ -88,6 +88,7 @@ FIG_SIZE=(10,5)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
 legend = ["read_from_file","write to dev","execution","read from dev","post_processing"]
 lgd = plot_bars(ax,kernels,names,"Versions", legend, [], stdz, show_legend=True, on_top=True)
+ax.set_ylim(0, 3600)
 
 name="/home/odroid/chasty-dfc-benchmarks/plots/execution_time_stacked.pdf"
 plt.savefig(name,bbox_extra_artists=(lgd,), bbox_inches = "tight")
