@@ -80,7 +80,6 @@ stdz.append(get_versions(SD,patterns[0],datasets[0],"dev_write"))
 stdz.append(get_versions(SD,patterns[0],datasets[0],"kernel_exec")) 
 stdz.append(get_versions(SD,patterns[0],datasets[0],"dev_read")) 
 stdz.append(get_versions(SD,patterns[0],datasets[0],"post_proc")) 
-stdz.append(get_versions(SD,patterns[0],datasets[0],"file_read")) 
 
 
 print kernels, stdz
