@@ -16,9 +16,10 @@ fancy_names = ["AC (CPU)", \
          "DFC (CPU)", \
          "PFAC", \
          "DFC", \
-         "DFC vect", \
+         #"DFC vect", \
          "COMB", \
-         "COMB vect"] 
+         #"COMB vect", \
+         ] 
 
 need_correction = [ "ac-snort", "dfc-cpu"]
 
@@ -90,22 +91,45 @@ kernels = [get_datasets(Data,patterns[0],names[0],"sum")]
 kernels.append(get_datasets(Data,patterns[0],names[1],"sum"))
 kernels.append(get_datasets(Data,patterns[0],names[2],"sum"))
 kernels.append(get_datasets(Data,patterns[0],names[3],"sum"))
-kernels.append(get_datasets(Data,patterns[0],names[4],"sum"))
+#kernels.append(get_datasets(Data,patterns[0],names[4],"sum"))
 kernels.append(get_datasets(Data,patterns[0],names[5],"sum"))
-kernels.append(get_datasets(Data,patterns[0],names[6],"sum"))
+#kernels.append(get_datasets(Data,patterns[0],names[6],"sum"))
 
 
 stdz = [[0]*len(kernels[0])] * len(kernels)
 
 print kernels, stdz
-FIG_SIZE=(20,10)
+FIG_SIZE=(10,5)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
 legend = fancy_names
 lgd = plot_bars(ax,kernels,fancy_dataset_names,"Data sets", legend, [], stdz, show_legend=True, on_top=False)
-ax.set_ylim(0, 3600)
 
 name="/home/odroid/chasty-dfc-benchmarks/plots/all_datasets_http_rules.pdf"
 plt.savefig(name,bbox_extra_artists=(lgd,), bbox_inches = "tight")
+subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
+subprocess.Popen("pdfcrop")
+
+plt.show()
+
+kernels = [get_datasets(Data,patterns[1],names[0],"sum")] 
+kernels.append(get_datasets(Data,patterns[1],names[1],"sum"))
+kernels.append(get_datasets(Data,patterns[1],names[2],"sum"))
+kernels.append(get_datasets(Data,patterns[1],names[3],"sum"))
+#kernels.append(get_datasets(Data,patterns[1],names[4],"sum"))
+kernels.append(get_datasets(Data,patterns[1],names[5],"sum"))
+#kernels.append(get_datasets(Data,patterns[1],names[6],"sum"))
+
+
+stdz = [[0]*len(kernels[0])] * len(kernels)
+
+print kernels, stdz
+fig_size=(10,5)
+fig , ax = plt.subplots(1,1,figsize=fig_size)
+legend = fancy_names
+lgd = plot_bars(ax,kernels,fancy_dataset_names,"Data sets", legend, [], stdz, show_legend=False, on_top=False)
+
+name="/home/odroid/chasty-dfc-benchmarks/plots/all_datasets_5K_rules.pdf"
+plt.savefig(name, bbox_inches = "tight")
 subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
 subprocess.Popen("pdfcrop")
 

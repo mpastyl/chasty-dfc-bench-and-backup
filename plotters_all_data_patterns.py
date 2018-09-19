@@ -7,7 +7,7 @@ def plot_bars(ax,groups,labels,title,legend,to_compare,stdz,show_legend=False, o
 
         N = len(labels)
         ind = np.arange(N)  # the x locations for the groups
-        width = 0.08      # the width of the bars
+        width = 0.11      # the width of the bars
 
 
 
@@ -18,7 +18,7 @@ def plot_bars(ax,groups,labels,title,legend,to_compare,stdz,show_legend=False, o
         ax.set_ylabel('Execution time (ms)')
         ax.set_xlabel(title)
         #ax.set_xticks(ind + 2*width)
-        ax.set_xticks(ind+3.5*width)
+        ax.set_xticks(ind+2.5*width)
         ax.set_xticklabels(labels,rotation='0')
         rects_set=[]
         lgd=[]
@@ -44,7 +44,7 @@ def plot_bars(ax,groups,labels,title,legend,to_compare,stdz,show_legend=False, o
         if show_legend:
             #ax.legend((rects_set),legend,loc=2,ncol=2)
             #ax.legend((rects_set),legend, loc=4,ncol=2)
-            lgd = ax.legend((rects_set),legend,bbox_to_anchor=(0.,1.1,1.00,0.05),loc=2,ncol=3, mode="expand", borderaxespad=0.1,markerscale=12)
+            lgd = ax.legend((rects_set),legend,bbox_to_anchor=(0.,1.1,1.00,0.08),loc=2,ncol=3, mode="expand", borderaxespad=0.1,markerscale=12)
         
         ax.plot()
         return lgd
