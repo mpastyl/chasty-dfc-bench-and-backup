@@ -11,9 +11,13 @@ log_name=$version"_throughput."$(date +%Y-%m-%d_%H:%M)".log"
 
 datasets=(\
 	  /home/odroid/Downloads/dfc-datasets/outside_http.pcap \
+	  /home/odroid/Downloads/dfc-datasets/testbed_payload_small \
+	  /home/odroid/Downloads/dfc-datasets/bigFlows.pcap_small \
+	  /home/odroid/Downloads/dfc-datasets/random.data_small \
 	 )
 patterns=(\
 	  /home/odroid/Downloads/dfc-rulesets/http_related_rules \
+	  /home/odroid/Downloads/dfc-rulesets/emerging_all_5000 \
 	 )
 repeat=5
 
