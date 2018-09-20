@@ -1,5 +1,5 @@
 
-fix="2018-09-19"
+fix="2018-09-20"
 cd logs
 
 new_logs=$(ls *$fix*)
