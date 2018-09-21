@@ -4,6 +4,12 @@ import subprocess
 from plotters import plot_bars
 import numpy as np
 
+log_total = "logs/df_size_combined_total_cost_throughput.2018-09-20_18:13.log"
+log_filtering = "logs/df_size_filtering_total_cost_throughput.2018-09-20_18:11.log"
+
+#log_total = "logs/df_size_combined_total_cost_throughput.2018-09-18_15:06.log"
+#log_filtering = "logs/df_size_combined_filtering_cost_throughput.2018-09-18_15:05.log"
+
 names = [ "dfc_size_combined"]
 df_sizes = ["0x1000", "0x2000" ,"0x4000", "0x8000", "0x10000", "0x20000", "0x40000", "0x80000"]
 df_sizes_kb = [0.5, 1 ,2 ,4 ,8 ,16, 32, 64]
@@ -27,7 +33,7 @@ patterns = ["http_related_rules"]
 
 total_cost = []
 
-with open("logs/df_size_combined_total_cost_throughput.2018-09-18_15:06.log",'rb') as log:
+with open(log_total,'rb') as log:
     for row in log:
         df_size = 0
         v = row.split("version: ")[1].split()[0]
@@ -40,7 +46,7 @@ with open("logs/df_size_combined_total_cost_throughput.2018-09-18_15:06.log",'rb
 
 filtering_cost = []
 
-with open("logs/df_size_combined_filtering_cost_throughput.2018-09-18_15:05.log",'rb') as log:
+with open(log_filtering,'rb') as log:
     for row in log:
         df_size = 0
         v = row.split("version: ")[1].split()[0]
