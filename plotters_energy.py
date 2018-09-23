@@ -1,15 +1,15 @@
 import numpy as np
 
 colors = ['lightgreen','lightsalmon','skyblue','steelblue','mediumseagreen','0.30','0.70','m']
-hatches = ['/','\\\\','x','\\','//','/','\\\\','x','\\','//']
+hatches = ['/','\\\\','x','\\','//', '/','\\\\','x','\\','//']
 
 def plot_bars(ax,groups,labels,title,legend,to_compare,stdz,show_legend=False, on_top=False):
 
         N = len(labels)
         ind = np.arange(N)  # the x locations for the groups
         width = 0.5      # the width of the bars
-        
-        print ind
+
+
 
         baseline = groups[0]
 
@@ -38,14 +38,14 @@ def plot_bars(ax,groups,labels,title,legend,to_compare,stdz,show_legend=False, o
                         autolabel(ax,rects,vals,title,legend,c,labels)
                 rects_set.append(rects)
                 if not on_top:
-                    ind = [x+width+0.25 for x in ind]
+                    ind = [x+width for x in ind]
                 c+=1
                 if on_top:
                     bottoms = list(np.array(bottoms)+ np.array(group))
         if show_legend:
             #ax.legend((rects_set),legend,loc=2,ncol=2)
             #ax.legend((rects_set),legend, loc=4,ncol=2)
-            lgd = ax.legend((rects_set),legend,bbox_to_anchor=(0.,1.1,1.00,0.15),loc=2,ncol=3, mode="expand", borderaxespad=0.1,markerscale=8)
+            lgd = ax.legend((rects_set),legend,bbox_to_anchor=(0.,1.1,1.00,0.25),loc=2,ncol=2, mode="expand", borderaxespad=0.1,markerscale=12)
         
         ax.plot()
         return lgd

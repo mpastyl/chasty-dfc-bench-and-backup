@@ -37,7 +37,7 @@ for v in ALL:
     print x
     total_en.append(x)
 
-kernels = [[x] for x in total_en]
+kernels = [total_en]
 print kernels
 stdz = [[0]*len(kernels[0])]*len(kernels)
 
@@ -45,12 +45,13 @@ FIG_SIZE=(7,3.5)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
 #legend = ["read_from_file","write to dev","execution","read from dev","post_processing"]
 #legend = ["Read from file", "Write to device", "Pattern matching execution","Read from device","Post-procesing"]
-legend = fancy_names
-labels = [""]
-lgd = plot_bars(ax,kernels,labels,"Versions", legend, [], stdz, show_legend=True, on_top=False)
+legend = ["A"]
+labels = fancy_names
+lgd = plot_bars(ax,kernels,labels,"Versions", legend, [], stdz, show_legend=False, on_top=False)
 
 name="/home/odroid/chasty-dfc-benchmarks/plots/energy.pdf"
-plt.savefig(name,bbox_extra_artists=(lgd,), bbox_inches = "tight")
+#plt.savefig(name,bbox_extra_artists=(lgd,), bbox_inches = "tight")
+plt.savefig(name, bbox_inches = "tight")
 subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
 subprocess.Popen("pdfcrop")
 
