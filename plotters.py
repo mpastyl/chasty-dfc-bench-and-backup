@@ -19,7 +19,7 @@ def plot_bars(ax,groups,labels,title,legend,to_compare,stdz,show_legend=False, o
         ax.set_xlabel(title)
         #ax.set_xticks(ind + 2*width)
         ax.set_xticks(ind+0.5*width)
-        ax.set_xticklabels(labels,rotation='0')
+        ax.set_xticklabels(labels,rotation='45')
         rects_set=[]
         lgd=[]
         c=0
@@ -45,7 +45,7 @@ def plot_bars(ax,groups,labels,title,legend,to_compare,stdz,show_legend=False, o
         if show_legend:
             #ax.legend((rects_set),legend,loc=2,ncol=2)
             #ax.legend((rects_set),legend, loc=4,ncol=2)
-            lgd = ax.legend((rects_set),legend,bbox_to_anchor=(0.,1.1,1.01,0.102),loc=2,ncol=3, mode="expand", borderaxespad=0.1,markerscale=12)
+            lgd = ax.legend((rects_set),legend,bbox_to_anchor=(0.,1.1,1.00,0.25),loc=2,ncol=2, mode="expand", borderaxespad=0.1,markerscale=12)
         
         ax.plot()
         return lgd

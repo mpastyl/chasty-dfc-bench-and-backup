@@ -11,6 +11,14 @@ names = ["ac-snort", \
          "dfc_vec", \
          "combined", \
          "combined_vec"]
+fancy_names = [ \
+            "AC (CPU)", \
+            "DFC (CPU)", \
+            "PFAC (GPU)", \
+            "DFC (GPU)", \
+            "DFC Vect (GPU)", \
+            "HYBRID (GPU)", \
+            "HYBRID Vect (GPU)"]
 
 need_correction = [ "ac-snort", "dfc-cpu"]
 
@@ -74,19 +82,20 @@ kernels.append(get_versions(Data,patterns[0],datasets[0],"dev_write"))
 kernels.append(get_versions(Data,patterns[0],datasets[0],"kernel_exec")) 
 kernels.append(get_versions(Data,patterns[0],datasets[0],"dev_read")) 
 kernels.append(get_versions(Data,patterns[0],datasets[0],"post_proc")) 
-#stdz = [[0]*len(kernels[0])]*len(kernels)
-stdz = [get_versions(SD,patterns[0],datasets[0],"file_read")] 
-stdz.append(get_versions(SD,patterns[0],datasets[0],"dev_write"))
-stdz.append(get_versions(SD,patterns[0],datasets[0],"kernel_exec")) 
-stdz.append(get_versions(SD,patterns[0],datasets[0],"dev_read")) 
-stdz.append(get_versions(SD,patterns[0],datasets[0],"post_proc")) 
+stdz = [[0]*len(kernels[0])]*len(kernels)
+#stdz = [get_versions(SD,patterns[0],datasets[0],"file_read")] 
+#stdz.append(get_versions(SD,patterns[0],datasets[0],"dev_write"))
+#stdz.append(get_versions(SD,patterns[0],datasets[0],"kernel_exec")) 
+#stdz.append(get_versions(SD,patterns[0],datasets[0],"dev_read")) 
+#stdz.append(get_versions(SD,patterns[0],datasets[0],"post_proc")) 
 
 
 print kernels, stdz
-FIG_SIZE=(10,5)
+FIG_SIZE=(7,3.5)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
-legend = ["read_from_file","write to dev","execution","read from dev","post_processing"]
-lgd = plot_bars(ax,kernels,names,"Versions", legend, [], stdz, show_legend=True, on_top=True)
+#legend = ["read_from_file","write to dev","execution","read from dev","post_processing"]
+legend = ["Read from file", "Write to device", "Pattern matching execution","Read from device","Post-procesing"]
+lgd = plot_bars(ax,kernels,fancy_names,"Versions", legend, [], stdz, show_legend=True, on_top=True)
 ax.set_ylim(0, 3600)
 
 name="/home/odroid/chasty-dfc-benchmarks/plots/execution_time_stacked.pdf"
@@ -95,4 +104,12 @@ subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
 subprocess.Popen("pdfcrop")
 
 plt.show()
+
+
+print "Comparisons"
+print " AC total / Hybrid total" , float( kernels[0][0] + kernels[2][0]) / (kernels[0][5] + kernels[1][5]+ kernels[2][5]+ kernels[3][5]+ kernels[4][5])
+print " AC exec / Hybrid exec" ,  float(kernels[2][0]) / kernels[2][5]
+print " DFC (GPU) / PFAC", float(kernels[2][3])/kernels[2][2]
+print " PFAC exec / HYBRID exec", float(kernels[2][2])/kernels[2][5]
+print " DFC (GPU) exec / HYBRID exec", float(kernels[2][3])/kernels[2][5]
 

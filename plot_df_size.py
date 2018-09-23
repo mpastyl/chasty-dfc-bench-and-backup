@@ -68,18 +68,18 @@ time_filtering  = zip(*filtering_cost)[1]
 #plt.plot(time_filtering)
 #plt.show()
 
-FIG_SIZE=(7,7)
+FIG_SIZE=(6,4)
 fig , ax1 = plt.subplots(1,1,figsize=FIG_SIZE)
-ax1.plot(time_total,label='Total execution cost')
-ax1.plot(time_filtering,label='Filtering cost')
+ax1.plot(time_total,'-v',label='Total execution cost')
+ax1.plot(time_filtering,'-^',label='Filtering cost')
 ax1.set_xticklabels(df_sizes_kb)
 ax1.set_xlabel("Filter size (KB)")
 ax1.set_ylabel("Execution time (ms)")
 ax1.legend(loc=2)
 
 ax2 = ax1.twinx()
-ax2.plot(filtering_ratio,'r',label='Filtering ratio')
-ax2.set_ylabel("Filtering ratio (%)")
+ax2.plot(filtering_ratio,'r-.',label='Hit ratio')
+ax2.set_ylabel("Hit ratio (%)")
 ax2.legend()
 
 name="/home/odroid/combined_filter_size.pdf"

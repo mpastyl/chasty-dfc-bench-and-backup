@@ -10,14 +10,15 @@ names = ["ac-snort", \
          "dfc", \
          "dfc_vec", \
          "combined", \
-         "combined_vec"]
+         "combined_vec", \
+         ]
 
 fancy_names = ["AC (CPU)", \
          "DFC (CPU)", \
-         "PFAC", \
-         "DFC", \
+         "PFAC (GPU)", \
+         "DFC (GPU)", \
          #"DFC vect", \
-         "COMB", \
+         "HYBRID (GPU)", \
          #"COMB vect", \
          ] 
 
@@ -99,7 +100,7 @@ kernels.append(get_datasets(Data,patterns[0],names[5],"sum"))
 stdz = [[0]*len(kernels[0])] * len(kernels)
 
 print kernels, stdz
-FIG_SIZE=(10,5)
+FIG_SIZE=(7,3)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
 legend = fancy_names
 lgd = plot_bars(ax,kernels,fancy_dataset_names,"Data sets", legend, [], stdz, show_legend=True, on_top=False)
@@ -123,7 +124,7 @@ kernels.append(get_datasets(Data,patterns[1],names[5],"sum"))
 stdz = [[0]*len(kernels[0])] * len(kernels)
 
 print kernels, stdz
-fig_size=(10,5)
+fig_size=(7,3)
 fig , ax = plt.subplots(1,1,figsize=fig_size)
 legend = fancy_names
 lgd = plot_bars(ax,kernels,fancy_dataset_names,"Data sets", legend, [], stdz, show_legend=False, on_top=False)
