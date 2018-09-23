@@ -9,9 +9,9 @@ fancy_names = [ \
             "DFC (CPU)", \
             "PFAC (GPU)", \
             "DFC (GPU)", \
-            #"DFC Vect (GPU)", \
+            "DFC Vect (GPU)", \
             "HYBRID (GPU)", \
-            #"HYBRID Vect (GPU)"\
+            "HYBRID Vect (GPU)"\
 			]
 
 
@@ -23,10 +23,13 @@ pfac_en = "a15-watt    322.534 a17-watt     52.246 gpu-watt    137.496 mem-watt 
 
 dfc_en = "a15-watt    398.396 a17-watt     67.109 gpu-watt    205.917 mem-watt     34.317 Total_energy 705.739"
 
+dfc_vec_en = "a15-watt   418.258 a17-watt     70.403 gpu-watt    230.247 mem-watt     47.228 Total_energy 766.136"
+
 hybrid_en = "a15-watt    323.180 a17-watt     50.954 gpu-watt    110.878 mem-watt     20.988 Total_energy 506.0"
 
+hybrid_vec_en = "a15-watt    341.908 a17-watt     52.612 gpu-watt    130.096 mem-watt     26.730 Total_energy 551.346"
 
-ALL = [ac_en, dfc_cpu_en, pfac_en, dfc_en, hybrid_en]
+ALL = [ac_en, dfc_cpu_en, pfac_en, dfc_en, dfc_vec_en, hybrid_en, hybrid_vec_en]
 
 total_en = []
 for v in ALL:
