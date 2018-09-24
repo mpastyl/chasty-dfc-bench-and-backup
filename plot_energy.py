@@ -32,12 +32,24 @@ hybrid_vec_en = "a15-watt    341.908 a17-watt     52.612 gpu-watt    130.096 mem
 ALL = [ac_en, dfc_cpu_en, pfac_en, dfc_en, dfc_vec_en, hybrid_en, hybrid_vec_en]
 
 total_en = []
+cpu_en = []
+gpu_en = []
+mem_en = []
 for v in ALL:
     x = float(v.split("Total_energy ")[1])
-    print x
+    cpu = float(v.split()[1])
+    gpu = float(v.split()[5])
+    mem = float(v.split()[7])
+    print cpu
+    print gpu
+    print mem
     total_en.append(x)
+    cpu_en.append(cpu)
+    gpu_en.append(gpu)
+    mem_en.append(mem)
 
-kernels = [total_en]
+
+kernels = [cpu_en, gpu_en]
 print kernels
 stdz = [[0]*len(kernels[0])]*len(kernels)
 
@@ -45,11 +57,12 @@ FIG_SIZE=(7,3.5)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
 #legend = ["read_from_file","write to dev","execution","read from dev","post_processing"]
 #legend = ["Read from file", "Write to device", "Pattern matching execution","Read from device","Post-procesing"]
-legend = ["A"]
+legend = ["CPU energy","GPU energy"]
 labels = fancy_names
-lgd = plot_bars(ax,kernels,labels,"Versions", legend, [], stdz, show_legend=False, on_top=False)
+#lgd = plot_bars(ax,kernels,labels,"Versions", legend, [], stdz, show_legend=False, on_top=False)
+lgd = plot_bars(ax,kernels,labels,"Versions", legend, [], stdz, show_legend=True, on_top=True)
 
-name="/home/odroid/chasty-dfc-benchmarks/plots/energy.pdf"
+name="/home/odroid/chasty-dfc-benchmarks/plots/energy_stacked.pdf"
 #plt.savefig(name,bbox_extra_artists=(lgd,), bbox_inches = "tight")
 plt.savefig(name, bbox_inches = "tight")
 subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
