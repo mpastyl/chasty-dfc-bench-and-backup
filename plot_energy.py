@@ -70,3 +70,6 @@ subprocess.Popen("pdfcrop")
 
 plt.show()
 
+print "Hybrid (gpu+cpu) vs AC (gpu+cpu))", float(cpu_en[0] + gpu_en[0])/(cpu_en[5] +gpu_en[5])
+print "Hybrid (gpu+cpu) vs PFAC (gpu+cpu))", float(cpu_en[2] + gpu_en[2])/(cpu_en[5] +gpu_en[5])
+
