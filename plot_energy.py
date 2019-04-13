@@ -5,13 +5,13 @@ from plotters_energy import plot_bars
 import numpy as np
 
 fancy_names = [ \
-            "AC (CPU)", \
-            "DFC (CPU)", \
-            "PFAC (GPU)", \
-            "DFC (GPU)", \
-            "DFC Vect (GPU)", \
-            "HYBRID (GPU)", \
-            "HYBRID Vect (GPU)"\
+            "AC\n(CPU)", \
+            "DFC\n(CPU)", \
+            "PFAC\n(GPU)", \
+            "DFC\n(GPU)", \
+            "DFC Vect\n(GPU)", \
+            "HYBRID\n(GPU)", \
+            "HYBRID\nVect (GPU)"\
 			]
 
 
@@ -53,7 +53,7 @@ kernels = [cpu_en, gpu_en]
 print kernels
 stdz = [[0]*len(kernels[0])]*len(kernels)
 
-FIG_SIZE=(7,3.5)
+FIG_SIZE=(6,2.5)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
 #legend = ["read_from_file","write to dev","execution","read from dev","post_processing"]
 #legend = ["Read from file", "Write to device", "Pattern matching execution","Read from device","Post-procesing"]
@@ -61,15 +61,33 @@ legend = ["CPU energy","GPU energy"]
 labels = fancy_names
 #lgd = plot_bars(ax,kernels,labels,"Versions", legend, [], stdz, show_legend=False, on_top=False)
 lgd = plot_bars(ax,kernels,labels,"Versions", legend, [], stdz, show_legend=True, on_top=True)
+plt.autoscale(axis='x',tight=True)
 
-name="/home/odroid/chasty-dfc-benchmarks/plots/energy_stacked.pdf"
-#plt.savefig(name,bbox_extra_artists=(lgd,), bbox_inches = "tight")
-plt.savefig(name, bbox_inches = "tight")
+#name="/home/odroid/chasty-dfc-benchmarks/plots/energy_stacked.pdf"
+name="/Users/mpastyl/clone_dfc_odroid_results/chasty-dfc-bench-and-backup/plots/energy_stacked.pdf"
+plt.savefig(name,bbox_extra_artists=(lgd,), bbox_inches = "tight")
+#plt.savefig(name, bbox_inches = "tight")
 subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
-subprocess.Popen("pdfcrop")
+#subprocess.Popen("pdfcrop")
 
 plt.show()
 
 print "Hybrid (gpu+cpu) vs AC (gpu+cpu))", float(cpu_en[0] + gpu_en[0])/(cpu_en[5] +gpu_en[5])
 print "Hybrid (gpu+cpu) vs PFAC (gpu+cpu))", float(cpu_en[2] + gpu_en[2])/(cpu_en[5] +gpu_en[5])
 
+
+print "ac cpu " ,cpu_en[0]+gpu_en[0]
+print "dfc cpu" , cpu_en[1]+gpu_en[1]
+print "pfac gpu ",cpu_en[2]+gpu_en[2]
+print "dfc gpu ", cpu_en[3]+gpu_en[3]
+print "dfc gpu vec ", cpu_en[4]+gpu_en[4]
+print "hybrid ", cpu_en[5]+gpu_en[5]
+print "hybrid vec", cpu_en[6]+gpu_en[6]
+
+print "improvement", float(cpu_en[0]+gpu_en[0])/(cpu_en[0]+gpu_en[0])
+print "improvement", float(cpu_en[0]+gpu_en[0])/(cpu_en[1]+gpu_en[1])
+print "improvement", float(cpu_en[0]+gpu_en[0])/(cpu_en[2]+gpu_en[2])
+print "improvement", float(cpu_en[0]+gpu_en[0])/(cpu_en[3]+gpu_en[3])
+print "improvement", float(cpu_en[0]+gpu_en[0])/(cpu_en[4]+gpu_en[4])
+print "improvement", float(cpu_en[0]+gpu_en[0])/(cpu_en[5]+gpu_en[5])
+print "improvement", float(cpu_en[0]+gpu_en[0])/(cpu_en[6]+gpu_en[6])

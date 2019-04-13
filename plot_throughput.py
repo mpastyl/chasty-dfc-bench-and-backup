@@ -12,13 +12,13 @@ names = ["ac-snort", \
          "combined", \
          "combined_vec"]
 fancy_names = [ \
-            "AC (CPU)", \
-            "DFC (CPU)", \
-            "PFAC (GPU)", \
-            "DFC (GPU)", \
-            "DFC Vect (GPU)", \
-            "HYBRID (GPU)", \
-            "HYBRID Vect (GPU)"]
+            "AC\n(CPU)", \
+            "DFC\n(CPU)", \
+            "PFAC\n(GPU)", \
+            "DFC\n(GPU)", \
+            "DFC Vect\n(GPU)", \
+            "HYBRID\n(GPU)", \
+            "HYBRID\nVect (GPU)"]
 
 need_correction = [ "ac-snort", "dfc-cpu"]
 
@@ -91,14 +91,15 @@ stdz = [[0]*len(kernels[0])]*len(kernels)
 
 
 print kernels, stdz
-FIG_SIZE=(7,3.5)
+FIG_SIZE=(6,2.5)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
 #legend = ["read_from_file","write to dev","execution","read from dev","post_processing"]
 legend = ["Read from file", "Write to device", "Pattern matching execution","Read from device","Post-procesing"]
 lgd = plot_bars(ax,kernels,fancy_names,"Versions", legend, [], stdz, show_legend=True, on_top=True)
 ax.set_ylim(0, 3600)
+plt.autoscale(axis='x',tight=True)
 
-name="/home/odroid/chasty-dfc-benchmarks/plots/execution_time_stacked.pdf"
+name="/Users/mpastyl/clone_dfc_odroid_results/chasty-dfc-bench-and-backup/plots/execution_time_stacked.pdf"
 plt.savefig(name,bbox_extra_artists=(lgd,), bbox_inches = "tight")
 subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
 subprocess.Popen("pdfcrop")
@@ -113,3 +114,13 @@ print " DFC (GPU) / PFAC", float(kernels[2][3])/kernels[2][2]
 print " PFAC exec / HYBRID exec", float(kernels[2][2])/kernels[2][5]
 print " DFC (GPU) exec / HYBRID exec", float(kernels[2][3])/kernels[2][5]
 
+for i,name in enumerate(fancy_names):
+    print "--------------"
+    print "name: ",name
+    print "read from file: ", kernels[0][i]
+    print "write to dev: ", kernels[1][i]
+    print "Execute: ", kernels[2][i]
+    print "Read from dev", kernels[3][i]
+    print "Post proc", kernels[4][i]
+    print "Total time:", kernels[0][i] + kernels[1][i] +kernels[2][i] +kernels[3][i]+ kernels[4][i]
+    print "time impr: ", float(kernels[0][0] + kernels[1][0] +kernels[2][0] +kernels[3][0]+ kernels[4][0])/ (kernels[0][i] + kernels[1][i] +kernels[2][i] +kernels[3][i]+ kernels[4][i])

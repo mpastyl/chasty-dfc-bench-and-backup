@@ -4,6 +4,8 @@ import subprocess
 from plotters import plot_bars
 import numpy as np
 
+plt.style.use('classic')
+
 log_total = "logs/df_size_combined_total_cost_throughput.2018-09-20_18:13.log"
 log_filtering = "logs/df_size_filtering_total_cost_throughput.2018-09-20_18:11.log"
 
@@ -68,7 +70,7 @@ time_filtering  = zip(*filtering_cost)[1]
 #plt.plot(time_filtering)
 #plt.show()
 
-FIG_SIZE=(6,4)
+FIG_SIZE=(6,3)
 fig , ax1 = plt.subplots(1,1,figsize=FIG_SIZE)
 ax1.plot(time_total,'-v',label='Total execution cost')
 ax1.plot(time_filtering,'-^',label='Filtering cost')
@@ -82,7 +84,8 @@ ax2.plot(filtering_ratio,'r-.',label='Hit ratio')
 ax2.set_ylabel("Hit ratio (%)")
 ax2.legend()
 
-name="/home/odroid/combined_filter_size.pdf"
+#name="/home/odroid/combined_filter_size.pdf"
+name="/Users/mpastyl/clone_dfc_odroid_results/chasty-dfc-bench-and-backup/plots/combined_filter_size.pdf"
 plt.savefig(name, bbox_inches = "tight")
 subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
 subprocess.Popen("pdfcrop")
