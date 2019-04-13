@@ -4,6 +4,8 @@ import subprocess
 from plotters_all_data_patterns import plot_bars
 import numpy as np
 
+plt.style.use('classic')
+
 names = ["ac-snort", \
          "dfc-cpu", \
          "pfac", \
@@ -100,15 +102,16 @@ kernels.append(get_datasets(Data,patterns[0],names[5],"sum"))
 stdz = [[0]*len(kernels[0])] * len(kernels)
 
 print kernels, stdz
-FIG_SIZE=(7,3)
+FIG_SIZE=(7,2)
 fig , ax = plt.subplots(1,1,figsize=FIG_SIZE)
 legend = fancy_names
 lgd = plot_bars(ax,kernels,fancy_dataset_names,"Data sets", legend, [], stdz, show_legend=True, on_top=False)
 
-name="/home/odroid/chasty-dfc-benchmarks/plots/all_datasets_http_rules.pdf"
+#name="/home/odroid/chasty-dfc-benchmarks/plots/all_datasets_http_rules.pdf"
+name="/Users/mpastyl/clone_dfc_odroid_results/chasty-dfc-bench-and-backup/plots/all_datasets_http_rules.pdf"
 plt.savefig(name,bbox_extra_artists=(lgd,), bbox_inches = "tight")
 subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
-subprocess.Popen("pdfcrop")
+#subprocess.Popen("pdfcrop")
 
 plt.show()
 
@@ -124,15 +127,16 @@ kernels.append(get_datasets(Data,patterns[1],names[5],"sum"))
 stdz = [[0]*len(kernels[0])] * len(kernels)
 
 print kernels, stdz
-fig_size=(7,3)
+fig_size=(7,2)
 fig , ax = plt.subplots(1,1,figsize=fig_size)
 legend = fancy_names
 lgd = plot_bars(ax,kernels,fancy_dataset_names,"Data sets", legend, [], stdz, show_legend=False, on_top=False)
 
-name="/home/odroid/chasty-dfc-benchmarks/plots/all_datasets_5K_rules.pdf"
+#name="/home/odroid/chasty-dfc-benchmarks/plots/all_datasets_5K_rules.pdf"
+name="/Users/mpastyl/clone_dfc_odroid_results/chasty-dfc-bench-and-backup/plots/all_datasets_5K_rules.pdf"
 plt.savefig(name, bbox_inches = "tight")
 subprocess.Popen("pdfcrop "+name+" "+name,shell=True)
-subprocess.Popen("pdfcrop")
+#subprocess.Popen("pdfcrop")
 
 plt.show()
 
